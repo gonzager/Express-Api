@@ -13,6 +13,22 @@ router.get("/", async (req, res, next) => {
     }
 });
 
+router.get("/:id", async (req, res, next) => {
+
+  const id = req.params.id;
+  try {
+      const usuario = await usuariosController.getUsuario(id);
+      if (usuario !==undefined)
+        res.status(200).json(usuario);
+      else
+        res.status(404).json("Not Found")
+  } catch (e) {
+      res.status(500).json(e);
+      next(e);
+  }
+});
+
+
 router.post("/", async(req, res, next) => {
   try {
       const usuarioAdd = await usuariosController.addUsuario(req.body);
@@ -20,6 +36,21 @@ router.post("/", async(req, res, next) => {
   } catch (e) {
     res.status(500).json(e);
     next(e);
+  }
+});
+
+router.delete("/:id", async (req, res, next) => {
+
+  const id = req.params.id;
+  try {
+      const removeUsuario = await usuariosController.removeUsuario(id);
+      if (removeUsuario === 1)
+        res.status(200).json({status: 'success', message: `${removeUsuario} usuario borrado.`});
+      else
+        res.status(404).json("Not Found")
+  } catch (e) {
+      res.status(500).json(e);
+      next(e);
   }
 });
 
