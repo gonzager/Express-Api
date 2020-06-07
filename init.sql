@@ -5,5 +5,5 @@ CREATE TABLE usuario
     nombre VARCHAR(255) NOT NULL,
     apellido VARCHAR(255) NOT NULL,
     edad integer NOT NULL,
-    tiene_registro boolean NOT NULL DEFAULT false,
+    tiene_registro boolean NOT NULL DEFAULT false
 )
